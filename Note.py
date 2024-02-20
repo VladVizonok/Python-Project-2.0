@@ -29,8 +29,7 @@ class Note:
     
     
 
-
-            
+    
 
 book = Notes()
 note1 = Note('Modern Buildings', 'Modern buildings showcase a wide range of architectural styles, technologies, and sustainable design practices.')

@@ -98,6 +98,7 @@ class Address:
 
 
 class Record:
+    
     def __init__(self, first_name, last_name, birthday=None, address=None, email=None):
         self.first_name = FirstName(first_name)
         self.last_name = LastName(last_name)
@@ -106,6 +107,8 @@ class Record:
         self.email = Email(email) if email else None
         self.phones = []
         self.ID = None
+        
+
 
     def add_phone(self, phone):
         #READY
@@ -163,13 +166,23 @@ class Record:
             f"phones: {self.phones}, "
             f"Birthday: {self.birthday}, Email: {self.email}, Address: {self.address}"
         )
+    def unit_phones(self):
+        full_phones = ''
+        for phone in self.phones:
+                full_phones = full_phones + ', ' + phone
+                full_phones = full_phones.removeprefix(', ')
+        return full_phones
+    
+    def full_name(self):
+        full_names = self.first_name.value + ' ' + self.last_name.value
+        return full_names
     
 
-# record = Record('John', 'Smith', '30.08.1999', '123 Main St', 'johnsmith@gmail.com')
-# record.add_phone('1234567890')
-# record.add_phone('1234567899')
+record = Record('John', 'Smith', '30.08.1999', '123 Main St', 'johnsmith@gmail.com')
+record.add_phone('1234567890')
+record.add_phone('1234567899')
 # record.remove_phone('1234567899')
-# record.edit_phone('1234567890', '1234567891')
-# record.set_email('vlad.vizonok@gmail.com')
-# record.set_birthday('30.09.1999')
-# # print(record)
+record.edit_phone('1234567890', '1234567891')
+record.set_email('vlad.vizonok@gmail.com')
+record.set_birthday('30.09.1999')
+print(record.full_name())

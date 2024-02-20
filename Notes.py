@@ -16,17 +16,17 @@ class Notes(UserList):
             if tag in note.tag:
                 result.append(note)
 
-        contact_table = Table(title='Find by tag', show_lines=True, width=125)
-        contact_table.add_column('Tag', style='magenta')
-        contact_table.add_column('ID', style='cyan')
-        contact_table.add_column('Title', style='yellow')
-        contact_table.add_column('Text', style='green')           
+        notes_table = Table(title='Find by tag', show_lines=True, width=125)
+        notes_table.add_column('Tag', style='magenta')
+        notes_table.add_column('ID', style='cyan')
+        notes_table.add_column('Title', style='yellow')
+        notes_table.add_column('Text', style='green')           
 
         for note in result:
-            contact_table.add_row(tag, str(note.ID), note.subject, note.content)
+            notes_table.add_row(tag, str(note.ID), note.subject, note.content)
 
         console = Console()
-        console.print(contact_table)
+        console.print(notes_table)
     
 
     def sort_by_tag(self):
@@ -38,18 +38,18 @@ class Notes(UserList):
                 else:
                     result[tag].append(note)
 
-        contact_table = Table(title='Sort by tag', show_lines=True, width=125)
-        contact_table.add_column('Tag', style='magenta')
-        contact_table.add_column('ID', style='cyan')
-        contact_table.add_column('Title', style='yellow')
-        contact_table.add_column('Text', style='green')           
+        notes_table = Table(title='Sort by tag', show_lines=True, width=125)
+        notes_table.add_column('Tag', style='magenta')
+        notes_table.add_column('ID', style='cyan')
+        notes_table.add_column('Title', style='yellow')
+        notes_table.add_column('Text', style='green')           
 
         for key, value in result.items():
             for elem in value:
-                contact_table.add_row(key, str(elem.ID), elem.subject, elem.content)
+                notes_table.add_row(key, str(elem.ID), elem.subject, elem.content)
 
         console = Console()
-        console.print(contact_table)
+        console.print(notes_table)
          
 
     def find_by_id(self, id):
@@ -59,16 +59,16 @@ class Notes(UserList):
                 for tag in note.tag:
                     all_tag = all_tag + ', ' + tag
                     all_tag = all_tag.removeprefix(', ')
-                contact_table = Table(title='Find by ID', show_lines=True, width=125)
-                contact_table.add_column('ID', style='cyan')
-                contact_table.add_column('Tag', style='magenta')
-                contact_table.add_column('Title', style='yellow')
-                contact_table.add_column('Text', style='green')           
+                notes_table = Table(title='Find by ID', show_lines=True, width=125)
+                notes_table.add_column('ID', style='cyan')
+                notes_table.add_column('Tag', style='magenta')
+                notes_table.add_column('Title', style='yellow')
+                notes_table.add_column('Text', style='green')           
 
-                contact_table.add_row(str(note.ID), all_tag, note.subject, note.content)
+                notes_table.add_row(str(note.ID), all_tag, note.subject, note.content)
 
                 console = Console()
-                console.print(contact_table)
+                console.print(notes_table)
             
 
     def find_by_subject(self, subject):
@@ -81,17 +81,17 @@ class Notes(UserList):
                 all_tag = all_tag + ', ' + tag
                 all_tag = all_tag.removeprefix(', ')       
 
-        contact_table = Table(title='Find by title', show_lines=True, width=125)
-        contact_table.add_column('ID', style='cyan')
-        contact_table.add_column('Tag', style='magenta')
-        contact_table.add_column('Title', style='yellow')
-        contact_table.add_column('Text', style='green')           
+        notes_table = Table(title='Find by title', show_lines=True, width=125)
+        notes_table.add_column('ID', style='cyan')
+        notes_table.add_column('Tag', style='magenta')
+        notes_table.add_column('Title', style='yellow')
+        notes_table.add_column('Text', style='green')           
 
         for note in result:
-            contact_table.add_row(str(note.ID), all_tag, note.subject, note.content)
+            notes_table.add_row(str(note.ID), all_tag, note.subject, note.content)
 
         console = Console()
-        console.print(contact_table)
+        console.print(notes_table)
     
     
     def delete(self, id):
@@ -101,19 +101,19 @@ class Notes(UserList):
     
     
     def show_all_notes(self):
-        contact_table = Table(title='All notes', show_lines=True, width=125)
-        contact_table.add_column('ID', style='cyan')
-        contact_table.add_column('Tag', style='magenta')
-        contact_table.add_column('Title', style='yellow')
-        contact_table.add_column('Text', style='green')           
+        notes_table = Table(title='All notes', show_lines=True, width=125)
+        notes_table.add_column('ID', style='cyan')
+        notes_table.add_column('Tag', style='magenta')
+        notes_table.add_column('Title', style='yellow')
+        notes_table.add_column('Text', style='green')           
 
         for note in self.data:
             all_tag = ''
             for tag in note.tag:
                 all_tag = all_tag + ', ' + tag
                 all_tag = all_tag.removeprefix(', ')
-            contact_table.add_row(str(note.ID), all_tag, note.subject, note.content)
+            notes_table.add_row(str(note.ID), all_tag, note.subject, note.content)
 
         console = Console()
-        console.print(contact_table)
+        console.print(notes_table)
     

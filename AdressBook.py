@@ -2,6 +2,8 @@ from collections import UserList
 from datetime import datetime, timedelta
 import pickle
 from record import FirstName, LastName, Birthday, Address, Email, Record
+from rich.console import Console
+from rich.table import Table
 
 
 class AddressBook(UserList):
@@ -12,19 +14,44 @@ class AddressBook(UserList):
         self.__id += 1
     
     def find_by_name(self, name):
-        #READY, BUT NEED TO FORMAT
+        #READY
         for record in self.data:
             full_name = record.first_name.value + ' ' + record.last_name.value
             if name == full_name:
-                return record
-        raise ValueError ('Contact doesn`t exist or you enter invalid name')
+                record_table = Table(title='Find by name', show_lines=True, )
+                record_table.add_column('Name', style='cyan')
+                record_table.add_column('ID', style='magenta')
+                record_table.add_column('Birthday', style='yellow')
+                record_table.add_column('Email', style='green')
+                record_table.add_column('Address', style='green')
+                record_table.add_column('Phones', style='green')        
+
+                record_table.add_row(record.full_name(), str(record.ID), record.birthday.value, record.email.value, record.address, record.unit_phones())
+
+                console = Console()
+                console.print(record_table)
+            else:
+                raise ValueError ('Contact doesn`t exist or you enter invalid name')
+    
     
     def find_by_id(self, ID):
-        #READY, BUT NEED TO FORMAT
+        #READY
         for record in self.data:
             if ID == record.ID:
-                return record
-        raise ValueError ('Contact doesn`t exist or you enter invalid ID')
+                record_table = Table(title='Find by ID', show_lines=True, )
+                record_table.add_column('ID', style='magenta')
+                record_table.add_column('Name', style='cyan')
+                record_table.add_column('Birthday', style='yellow')
+                record_table.add_column('Email', style='green')
+                record_table.add_column('Address', style='green')
+                record_table.add_column('Phones', style='green')        
+
+                record_table.add_row(str(record.ID), record.full_name(), record.birthday.value, record.email.value, record.address, record.unit_phones())
+
+                console = Console()
+                console.print(record_table)
+            else:
+                raise ValueError ('Contact doesn`t exist or you enter invalid ID')
     
     def add_phone(self, ID, phone):
         #READY
@@ -83,11 +110,24 @@ class AddressBook(UserList):
         for record in self.data:
             full_name = record.first_name.value + ' ' + record.last_name.value
             if word_to_find in full_name:
-                result.append(record.__str__())
+                result.append(record)
             for phone in record.phones:
                 if word_to_find in phone:
-                    result.append(record.__str__())
-        return result
+                    result.append(record)
+    
+        for record in result:
+            record_table = Table(title='Find All Match', show_lines=True, )
+            record_table.add_column('ID', style='magenta')
+            record_table.add_column('Name', style='cyan')
+            record_table.add_column('Birthday', style='yellow')
+            record_table.add_column('Email', style='green')
+            record_table.add_column('Address', style='green')
+            record_table.add_column('Phones', style='green')        
+
+            record_table.add_row(str(record.ID), record.full_name(), record.birthday.value, record.email.value, record.address, record.unit_phones())
+
+            console = Console()
+            console.print(record_table)
     
     def upcoming_birthdays(self, days):
         #READY
@@ -103,13 +143,38 @@ class AddressBook(UserList):
                 birthday_date = birth.replace(year=upcoming_date.year).date()
                 
             if birthday_date == upcoming_date:
-                upcoming_birthdays_list.append(contact.__str__())
-        return upcoming_birthdays_list
+                upcoming_birthdays_list.append(contact)
+        
+        for record in upcoming_birthdays_list:
+            record_table = Table(title='Upcoming birthday', show_lines=True, )
+            record_table.add_column('ID', style='magenta')
+            record_table.add_column('Name', style='cyan')
+            record_table.add_column('Birthday', style='yellow')
+            record_table.add_column('Email', style='green')
+            record_table.add_column('Address', style='green')
+            record_table.add_column('Phones', style='green')        
+
+            record_table.add_row(str(record.ID), record.full_name(), record.birthday.value, record.email.value, record.address, record.unit_phones())
+
+            console = Console()
+            console.print(record_table)
 
     
     def show_all(self):
-        record_values = [record.__str__() for record in self.data.values()]
-        return record_values
+        for record in self.data:
+            record_table = Table(title='Show All', show_lines=True, )
+            record_table.add_column('ID', style='magenta')
+            record_table.add_column('Name', style='cyan')
+            record_table.add_column('Birthday', style='yellow')
+            record_table.add_column('Email', style='green')
+            record_table.add_column('Address', style='green')
+            record_table.add_column('Phones', style='green')        
+
+            record_table.add_row(str(record.ID), record.full_name(), record.birthday.value, record.email.value, record.address, record.unit_phones())
+
+            console = Console()
+            console.print(record_table)
+
     
 
 
@@ -122,9 +187,11 @@ book.edit_email(1, 'vlad.vizonok@gmail.com')
 book.edit_birthday(1, '01.03.1988')
 book.add_phone(1, '1234567890')
 book.add_phone(1, '1234567899')
-book.change_phone(1,'1234567899', '1234567891')
-book.delete_phone(1, '1234567891')
-print(book.upcoming_birthdays(10))
+# book.change_phone(1,'1234567899', '1234567891')
+# book.delete_phone(1, '1234567891')
+book.find_by_name('Artur Morgan')
+book.find_all_match('Morgan')
+# print(book.upcoming_birthdays(10))
 
 # print(book.find_all_match('Artur'))
 
