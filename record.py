@@ -1,5 +1,5 @@
 import re
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 class FirstName:
@@ -17,7 +17,7 @@ class FirstName:
 
     def set_value(self, value):
         if not self.is_valid(value):
-            raise ValueError("Invalid value")
+            raise ValueError("Invalid First Name. Try again.")
         self.value = value.title()
 
 class LastName:
@@ -35,7 +35,7 @@ class LastName:
 
     def set_value(self, value):
         if not self.is_valid(value):
-            raise ValueError("Invalid value")
+            raise ValueError("Invalid Last Name. Try again.")
         self.value = value.title()
 
 
@@ -54,31 +54,12 @@ class Email:
 
     def set_value(self, value):
         if not self.is_valid(value):
-            raise ValueError("Invalid value")
-        self.value = value
-
-
-class Phone:
-
-    def __init__(self, value):
-        self.set_value(value)
-
-    def __str__(self):
-        return str(self.value)
-
-    def is_valid(self, value):
-        if not len(value) == 10 and not len(list(filter(lambda num: num.isnumeric(), value))) == 10:
-            raise ValueError('Invalid phone number format')
-        return True
-
-    def set_value(self, value):
-        if not self.is_valid(value):
-            raise ValueError("Invalid value")
+            raise ValueError("Invalid email. Try again.")
         self.value = value
 
 
 class Birthday:
-    
+    #READY
     def __init__(self, value):
         self.set_value(value)
 
@@ -87,35 +68,20 @@ class Birthday:
 
     def is_valid(self, value):
         try:
-            datetime.strptime(value, "%Y-%m-%d")
+            datetime.strptime(value, '%d.%m.%Y')
             return True
         except ValueError as e:
-            raise ValueError(f"Wrong date format: {e}")
+            raise ValueError('Enter date in this format: dd.mm.yyyy')
 
     def set_value(self, value):
         if not self.is_valid(value):
             raise ValueError("Invalid value")
         self.value = value
 
-    def upcoming_birthdays(address_book, days):
-        current_date = datetime.now().date()
-        upcoming_date = current_date + timedelta(days=days)
-
-        upcoming_birthdays_list = []
-
-        for contact in address_book.values():
-            birthday_date = contact.get_birthday_date()
-
-            if birthday_date:
-                birthday_date = birthday_date.replace(year=upcoming_date.year)
-
-            if birthday_date == upcoming_date:
-                upcoming_birthdays_list.append(contact)
-
-        return upcoming_birthdays_list
-
+   
 
 class Address:
+    #READY
     def __init__(self, address_string):
         self.address_str = address_string
 
@@ -139,45 +105,71 @@ class Record:
         self.address = Address(address) if address else None
         self.email = Email(email) if email else None
         self.phones = []
+        self.ID = None
 
     def add_phone(self, phone):
-        new_number = Phone(phone)
-        if new_number not in self.phones:
+        #READY
+        new_number = phone
+        if not len(phone) == 10 and not len(list(filter(lambda num: num.isnumeric(), phone))) == 10:
+            raise ValueError('Invalid phone number format. Try again.')
+        if phone not in self.phones:
             self.phones.append(new_number)
+        else: 
+            raise ValueError('Phone is allready exist')
 
     def remove_phone(self, phone):
-        phones_to_remove = filter(lambda p: p.value == phone, self.phones)
-        self.phones.remove(list(phones_to_remove)[0])
+        #READY
+        if phone not in self.phones:
+            raise ValueError ('Phone is not exist or you enter invalid phone')
+        for elem in self.phones:
+            if elem == phone:
+                self.phones.remove(elem)
 
     def edit_phone(self, old_number, new_number):
-        if not Phone().is_valid(new_number):
-            raise ValueError('Invalid phone number format')
+        #READY
+        if not len(new_number) == 10 and not len(list(filter(lambda num: num.isnumeric(), new_number))) == 10:
+            raise ValueError('Invalid phone number format. Try again.')
         found = False
         for phone in self.phones:
-            if phone.value == old_number:
-                phone.value = new_number
+            if phone == old_number:
+                self.phones.remove(old_number)
+                self.phones.append(new_number)
                 found = True
                 break
-
         if not found:
             raise ValueError(
                 f"Phone number '{old_number}' not found in the record."
                 )
      
     def set_email(self, email):
+        #READY
         if not Email(email).is_valid(email):
-            raise ValueError('Invalid email format')
+            raise ValueError('Invalid email format. Try again.')
         self.email = Email(email)
+
+    def set_birthday(self, birthday):
+        #READY
+        if not Birthday(birthday).is_valid(birthday):
+            raise ValueError('Invalid Birthday format. Try again')
+        self.birthday = Birthday(birthday)
+
+    def set_address(self, address):
+        #READY
+        self.address = address
 
     def __str__(self):
         return (
             f"Contact name: {self.first_name.value} {self.last_name.value}, "
-            f"phones: {'; '.join(p.value for p in self.phones)}, "
+            f"phones: {self.phones}, "
             f"Birthday: {self.birthday}, Email: {self.email}, Address: {self.address}"
         )
     
 
-record = Record('John', 'Smith', '1987-01-23', '123 Main St', 'johnsmith@gmail.com')
-record.add_phone('1234567890')
-record.add_phone('1234567890')
-print(record)
+# record = Record('John', 'Smith', '30.08.1999', '123 Main St', 'johnsmith@gmail.com')
+# record.add_phone('1234567890')
+# record.add_phone('1234567899')
+# record.remove_phone('1234567899')
+# record.edit_phone('1234567890', '1234567891')
+# record.set_email('vlad.vizonok@gmail.com')
+# record.set_birthday('30.09.1999')
+# # print(record)
