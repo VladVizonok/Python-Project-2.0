@@ -234,7 +234,9 @@ def main():
                                 pass
 
                         if edit_input == 'exit':
-                                pass
+                            book.save_to_file()
+                            notebook.save_to_file()
+                            break
                         
                     except ValueError:
                         print('Note with this ID is not exist. ')
@@ -276,7 +278,9 @@ def main():
                     pass
 
                 if find_input == 'exit':
-                    pass
+                    book.save_to_file()
+                    notebook.save_to_file()
+                    break
 
                 
             if n_options_input == 'delete_note':
@@ -286,11 +290,13 @@ def main():
                         notebook.delete(int(delete_input))
                         print('Successfully deleted.')
 
-
             if n_options_input == 'help':
                 pass
+
             if n_options_input == 'exit':
-                pass
+                book.save_to_file()
+                notebook.save_to_file()
+                break
         
         if category_input == 'sort':
             pass
@@ -306,38 +312,5 @@ def main():
                     
 
         
-
-
-    # 
-
-
-
-
-    # while True:
-    #     user_input = input('Enter comand:')
-    #     if user_input == 'add':
-    #         name = input('Enter contact`s name: ')
-    #         new_record = Record(name)
-    #         phone = input('Enter contact`s phone: ')
-    #         new_record.add_phone(phone)
-    #         birthday = input('Enter contact`s birthday(dd.mm.yyyy): ')
-    #         new_record.birthday = Birthday(birthday)
-    #         book.add_record(new_record)
-    #         print('Contact saved')
-
-    #     if user_input == 'delete':
-    #         trash = input('Enter contact you want to delete: ')
-    #         book.delete(trash)
-    #         print('Cotact deleted')
-
-    #     if user_input == 'show_all':
-    #         print(book.show_all())
-
-    #     if user_input == 'exit':
-    #         book.save_to_file()
-    #         print('Good Bye!')
-    #         break
-            
-
 if __name__ == '__main__':
     main()

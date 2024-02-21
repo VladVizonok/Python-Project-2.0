@@ -163,6 +163,7 @@ class Record:
             f"phones: {self.phones}, "
             f"Birthday: {self.birthday}, Email: {self.email}, Address: {self.address}"
         )
+    
     def unit_phones(self):
         full_phones = ''
         for phone in self.phones:
@@ -175,8 +176,3 @@ class Record:
         return full_names
     
 
-record = Record('John', 'Smith', '30.08.1999', '123 Main St', 'johnsmith@gmail.com')
-record.add_phone('1234567890')
-record.set_email('vlad.vizonok@gmail.com')
-record.set_birthday('30.09.1999')
-print(record.phones)

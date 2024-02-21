@@ -213,16 +213,3 @@ class AddressBook(UserList):
 
     
 
-
-book = AddressBook()
-john = Record('John', 'Marston')
-book.add_record(john)
-book.edit_name(1, 'Artur', 'Morgan')
-book.edit_address(1, 'Shevchenka 54')
-book.edit_email(1, 'vlad.vizonok@gmail.com')
-book.edit_birthday(1, '30.09.1999')
-john2 = Record('John', 'Marston')
-book.add_record(john2)
-
-book.add_phone(1, '1234567899')
-# print(book.show_all())
