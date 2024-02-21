@@ -31,40 +31,40 @@ class Note:
 
     
 
-book = Notes()
-note1 = Note('Modern Buildings', 'Modern buildings showcase a wide range of architectural styles, technologies, and sustainable design practices.')
-note1.add_tag('art buildings architecture #design')
+# book = Notes()
+# note1 = Note('Modern Buildings', 'Modern buildings showcase a wide range of architectural styles, technologies, and sustainable design practices.')
+# note1.add_tag('art buildings architecture #design')
 
-note2 = Note('Salvador Dali', 'Dalí was a leading figure in the Surrealist movement, \nwhich sought to unlock the creative potential of the unconscious mind.')
-note2.add_tag('#art')
-note2.add_tag('art2')
+# note2 = Note('Salvador Dali', 'Dalí was a leading figure in the Surrealist movement, \nwhich sought to unlock the creative potential of the unconscious mind.')
+# note2.add_tag('#art')
+# note2.add_tag('art2')
 
-note3 = Note('New Inventions', 'Explore the latest inventions and technological advancements that are shaping the future.')
-note3.add_tag('history technology #innovation')
+# note3 = Note('New Inventions', 'Explore the latest inventions and technological advancements that are shaping the future.')
+# note3.add_tag('history technology #innovation')
 
-note4 = Note('Historical Events', 'Discover key events that shaped the course of history and influenced societies around the world.')
-note4.add_tag('history #events')
+# note4 = Note('Historical Events', 'Discover key events that shaped the course of history and influenced societies around the world.')
+# note4.add_tag('history #events')
 
-note5 = Note('Space Exploration', 'Delve into the mysteries of outer space and learn about the latest discoveries in space exploration.')
-note5.add_tag('space #science')
-
-
-note6 = Note('Nature Photography', 'Experience the beauty of nature through stunning photography capturing landscapes, wildlife, and more.')
-note6.add_tag('space nature #photography #art')
-
-book.add_note(note1)
-book.add_note(note2)
-book.add_note(note3)
-book.add_note(note4)
-book.add_note(note5)
-book.add_note(note6)
+# note5 = Note('Space Exploration', 'Delve into the mysteries of outer space and learn about the latest discoveries in space exploration.')
+# note5.add_tag('space #science')
 
 
+# note6 = Note('Nature Photography', 'Experience the beauty of nature through stunning photography capturing landscapes, wildlife, and more.')
+# note6.add_tag('space nature #photography #art')
+
+# book.add_note(note1)
+# book.add_note(note2)
+# book.add_note(note3)
+# book.add_note(note4)
+# book.add_note(note5)
+# book.add_note(note6)
 
 
 
-book.show_all_notes()
-book.find_by_tag('history')
-book.find_by_id(5)
-book.find_by_title('Nature Photography')
-book.sort_by_tag()
+
+
+# book.show_all_notes()
+# book.find_by_tag('history')
+# book.find_by_id(5)
+# book.find_by_title('Nature Photography')
+# book.sort_by_tag()

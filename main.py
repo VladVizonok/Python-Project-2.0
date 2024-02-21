@@ -26,7 +26,7 @@ def main():
             contact_com_list = WordCompleter(['create_contact', 'find_contact', 'delete_contact', 
                                               'edit_contact', 'upcoming birthday', 'help', 'exit'])
         
-            option_input = prompt('Choose option: ', completer=contact_com_list)
+            option_input = prompt('Choose contact`s option: ', completer=contact_com_list)
 
             if option_input == 'create_contact':
                 while True:
@@ -175,6 +175,126 @@ def main():
                 notebook.save_to_file()
                 break
         
+
+
+        if category_input == 'notes':
+            notes_com_list = WordCompleter(['create_note', 'edit_note', 
+                                            'find_note', 'delete_note', 
+                                            'help', 'exit'])
+            
+            n_options_input = prompt('Choose note`s options: ', completer=notes_com_list)
+
+            if n_options_input == 'create_note':
+                title_input = prompt('Enter your note title: ')
+                text_input = prompt('Enter text of your note: ')
+                new_note = Note(title_input, text_input)
+                notebook.add_note(new_note)
+                print('Successfully added.')
+
+            if n_options_input == 'edit_note':
+                edit_list = WordCompleter(['edit_title', 'edit_text', 
+                                           'set_tags', 'help', 'exit'])
+                ID_input = prompt('Enter your note`s ID: ')
+                edit_input = prompt('Choose option: ', completer=edit_list)
+                while True:
+                    try: 
+                        for note in notebook:
+                            if int(ID_input) not in map(lambda note: note.ID, notebook):
+                                raise ValueError
+                
+                        if edit_input == 'edit_title':
+                            new_title_input = prompt('Enter new title: ')
+                            for note in notebook:
+                                if int(ID_input) == note.ID:
+                                    note.edit_title(new_title_input)
+                                    print('Successfully changed.')
+                            break
+
+                        if edit_input == 'edit_text':
+                            new_text_input = prompt('Enter new text: ')
+                            for note in notebook:
+                                if int(ID_input) == note.ID:
+                                    note.edit_text(new_text_input)
+                                    print('Successfully changed.')
+                            break
+
+                        if edit_input == 'set_tags':
+                            tags_input = prompt('Enter tags, that you want to add/change in format #tag #tag: ')
+                            for note in notebook:
+                                if int(ID_input) == note.ID:
+                                    if note.tag == ['No tag`s']:
+                                        note.add_tag(tags_input)
+                                        print('Successfully added.')
+                                    else:
+                                        note.edit_tag(tags_input)
+                                        print('Successfully changed.')
+                            break
+                            
+                        if edit_input == 'help':
+                                pass
+
+                        if edit_input == 'exit':
+                                pass
+                        
+                    except ValueError:
+                        print('Note with this ID is not exist. ')
+                        break
+
+
+            if n_options_input == 'find_note':
+                find_list = WordCompleter(['find_by_title', 'find_by_tag',
+                                            'find_by_ID', 'sort_by_tags', 'show_all',
+                                            'help', 'exit'])
+                
+                find_input = prompt('Choose option: ', completer=find_list)
+                
+                if find_input == 'find_by_title':
+                    title_input = prompt('Enter note`s title, that you want to find: ')
+                    notebook.find_by_title(title_input)
+                
+                if find_input == 'find_by_tag':
+                    tag_input = prompt('Enter note`s tag, that you want to find: ')
+                    notebook.find_by_tag(tag_input)
+                
+                if find_input == 'find_by_ID': 
+                    id_input = prompt('Enter note`s ID, that you want to find: ')
+                    try:
+                        for note in notebook:
+                            if int(id_input) not in map(lambda note: note.ID, notebook):
+                                raise ValueError
+                            notebook.find_by_id(int(id_input))
+                    except ValueError:
+                        print('Note with this ID is not exist. ')
+
+                if find_input == 'sort_by_tags':
+                    notebook.sort_by_tag()
+
+                if find_input == 'show_all':
+                    notebook.show_all_notes()
+                
+                if find_input == 'help':
+                    pass
+
+                if find_input == 'exit':
+                    pass
+
+                
+            if n_options_input == 'delete_note':
+                delete_input = prompt('Enter note`s ID, that you want to delete: ')
+                for note in notebook:
+                    if note.ID == int(delete_input):
+                        notebook.delete(int(delete_input))
+                        print('Successfully deleted.')
+
+
+            if n_options_input == 'help':
+                pass
+            if n_options_input == 'exit':
+                pass
+        
+        if category_input == 'sort':
+            pass
+
         if category_input == 'help':
             pass
         

@@ -121,10 +121,12 @@ class Notes(UserList):
     def save_to_file(self, filename = 'notes_cash.bin'):
         with open (filename, 'wb') as file:
             pickle.dump(self.data, file)
+            pickle.dump(self.__id, file)
 
     def open_from_file(self, filename = 'notes_cash.bin'):
         try: 
             with open (filename, 'rb') as file:
                 self.data = pickle.load(file)
+                self.__id = pickle.load(file)
         except FileNotFoundError:
             print('Cash not found. Create new Note Book')
