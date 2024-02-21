@@ -1,11 +1,11 @@
-from Notes import Notes
+from notes import Notes
 
 class Note:
     # Для того, щоб вірно додати тег, потрібно попросити користувача вводити теги через пробіл в форматі "#tag #tag"
-    def __init__(self, subject, content):
+    def __init__(self, title, text):
         self.tag = ['No tag`s']
-        self.subject = subject
-        self.content = content
+        self.title = title
+        self.text = text
         self.ID = None
     
     def add_tag(self, tag):
@@ -17,14 +17,14 @@ class Note:
     def edit_tag(self, new_tag):
         self.tag = new_tag.split(' ')
     
-    def edit_title(self, new_subject):
-        self.subject = new_subject
+    def edit_title(self, new_title):
+        self.title = new_title
 
-    def edit_text(self, new_content):
-        self.content = new_content
+    def edit_text(self, new_text):
+        self.text = new_text
 
     def __str__(self):
-        return f'Tag: {self.tag}\nTitle: {self.subject}\nText: {self.content}'
+        return f'Tag: {self.tag}\nTitle: {self.title}\nText: {self.text}'
     
     
     
@@ -66,5 +66,5 @@ book.add_note(note6)
 book.show_all_notes()
 book.find_by_tag('history')
 book.find_by_id(5)
-book.find_by_subject('Nature Photography')
+book.find_by_title('Nature Photography')
 book.sort_by_tag()

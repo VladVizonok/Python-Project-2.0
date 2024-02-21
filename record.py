@@ -17,7 +17,7 @@ class FirstName:
 
     def set_value(self, value):
         if not self.is_valid(value):
-            raise ValueError("Invalid First Name. Try again.")
+            raise IndexError
         self.value = value.title()
 
 class LastName:
@@ -35,7 +35,7 @@ class LastName:
 
     def set_value(self, value):
         if not self.is_valid(value):
-            raise ValueError("Invalid Last Name. Try again.")
+            raise IndexError
         self.value = value.title()
 
 
@@ -54,7 +54,7 @@ class Email:
 
     def set_value(self, value):
         if not self.is_valid(value):
-            raise ValueError("Invalid email. Try again.")
+            raise ValueError
         self.value = value
 
 
@@ -67,15 +67,12 @@ class Birthday:
         return str(self.value)
 
     def is_valid(self, value):
-        try:
-            datetime.strptime(value, '%d.%m.%Y')
-            return True
-        except ValueError as e:
-            raise ValueError('Enter date in this format: dd.mm.yyyy')
+        datetime.strptime(value, '%d.%m.%Y')
+        return True
 
     def set_value(self, value):
         if not self.is_valid(value):
-            raise ValueError("Invalid value")
+            raise ValueError
         self.value = value
 
    
@@ -114,16 +111,16 @@ class Record:
         #READY
         new_number = phone
         if not len(phone) == 10 and not len(list(filter(lambda num: num.isnumeric(), phone))) == 10:
-            raise ValueError('Invalid phone number format. Try again.')
+            raise ValueError
         if phone not in self.phones:
             self.phones.append(new_number)
         else: 
-            raise ValueError('Phone is allready exist')
+            print('Phone is allready exist')
 
     def remove_phone(self, phone):
         #READY
         if phone not in self.phones:
-            raise ValueError ('Phone is not exist or you enter invalid phone')
+            raise ValueError
         for elem in self.phones:
             if elem == phone:
                 self.phones.remove(elem)
@@ -131,7 +128,7 @@ class Record:
     def edit_phone(self, old_number, new_number):
         #READY
         if not len(new_number) == 10 and not len(list(filter(lambda num: num.isnumeric(), new_number))) == 10:
-            raise ValueError('Invalid phone number format. Try again.')
+            raise ValueError
         found = False
         for phone in self.phones:
             if phone == old_number:
@@ -140,20 +137,20 @@ class Record:
                 found = True
                 break
         if not found:
-            raise ValueError(
+            print(
                 f"Phone number '{old_number}' not found in the record."
                 )
      
     def set_email(self, email):
         #READY
         if not Email(email).is_valid(email):
-            raise ValueError('Invalid email format. Try again.')
+            raise ValueError
         self.email = Email(email)
 
     def set_birthday(self, birthday):
         #READY
         if not Birthday(birthday).is_valid(birthday):
-            raise ValueError('Invalid Birthday format. Try again')
+            raise ValueError
         self.birthday = Birthday(birthday)
 
     def set_address(self, address):
@@ -180,9 +177,6 @@ class Record:
 
 record = Record('John', 'Smith', '30.08.1999', '123 Main St', 'johnsmith@gmail.com')
 record.add_phone('1234567890')
-record.add_phone('1234567899')
-# record.remove_phone('1234567899')
-record.edit_phone('1234567890', '1234567891')
 record.set_email('vlad.vizonok@gmail.com')
 record.set_birthday('30.09.1999')
-print(record.full_name())
+print(record.phones)

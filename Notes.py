@@ -1,6 +1,7 @@
 from collections import UserList
 from rich.console import Console
 from rich.table import Table
+import pickle
 
 class Notes(UserList):
     __id = 1
@@ -23,7 +24,7 @@ class Notes(UserList):
         notes_table.add_column('Text', style='green')           
 
         for note in result:
-            notes_table.add_row(tag, str(note.ID), note.subject, note.content)
+            notes_table.add_row(tag, str(note.ID), note.title, note.text)
 
         console = Console()
         console.print(notes_table)
@@ -46,7 +47,7 @@ class Notes(UserList):
 
         for key, value in result.items():
             for elem in value:
-                notes_table.add_row(key, str(elem.ID), elem.subject, elem.content)
+                notes_table.add_row(key, str(elem.ID), elem.title, elem.text)
 
         console = Console()
         console.print(notes_table)
@@ -65,16 +66,16 @@ class Notes(UserList):
                 notes_table.add_column('Title', style='yellow')
                 notes_table.add_column('Text', style='green')           
 
-                notes_table.add_row(str(note.ID), all_tag, note.subject, note.content)
+                notes_table.add_row(str(note.ID), all_tag, note.title, note.text)
 
                 console = Console()
                 console.print(notes_table)
             
 
-    def find_by_subject(self, subject):
+    def find_by_title(self, title):
         result = []
         for note in self.data:
-            if subject == note.subject:
+            if title == note.title:
                 result.append(note)
             all_tag = ''
             for tag in note.tag:
@@ -88,7 +89,7 @@ class Notes(UserList):
         notes_table.add_column('Text', style='green')           
 
         for note in result:
-            notes_table.add_row(str(note.ID), all_tag, note.subject, note.content)
+            notes_table.add_row(str(note.ID), all_tag, note.title, note.text)
 
         console = Console()
         console.print(notes_table)
@@ -112,8 +113,18 @@ class Notes(UserList):
             for tag in note.tag:
                 all_tag = all_tag + ', ' + tag
                 all_tag = all_tag.removeprefix(', ')
-            notes_table.add_row(str(note.ID), all_tag, note.subject, note.content)
+            notes_table.add_row(str(note.ID), all_tag, note.title, note.text)
 
         console = Console()
         console.print(notes_table)
     
+    def save_to_file(self, filename = 'notes_cash.bin'):
+        with open (filename, 'wb') as file:
+            pickle.dump(self.data, file)
+
+    def open_from_file(self, filename = 'notes_cash.bin'):
+        try: 
+            with open (filename, 'rb') as file:
+                self.data = pickle.load(file)
+        except FileNotFoundError:
+            print('Cash not found. Create new Note Book')
