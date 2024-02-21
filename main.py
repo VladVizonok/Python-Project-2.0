@@ -9,6 +9,7 @@ from notes import Notes
 from adressbook import AddressBook
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
+from sort import Sort
 
 
 
@@ -299,7 +300,8 @@ def main():
                 break
         
         if category_input == 'sort':
-            pass
+            folder_for_sort = prompt('Enter folder for sort: ')
+            Sort(folder_for_sort)
 
         if category_input == 'help':
             pass
