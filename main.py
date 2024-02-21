@@ -9,7 +9,7 @@ from notes import Notes
 from adressbook import AddressBook
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
-from sort import Sort
+
 
 
 
@@ -20,12 +20,17 @@ def main():
     book.open_from_file()
 
     while True:
-        category_list = WordCompleter(['contacts', 'notes', 'sort', 'help', 'exit'])
+        category_list = WordCompleter(['contacts', 'notes', 'help', 'exit'])
+
+        print('CATEGORY\n contacts\n notes\n help\n exit')
+
         category_input = prompt('Choose category: ', completer=category_list)
 
         if category_input == 'contacts':
             contact_com_list = WordCompleter(['create_contact', 'find_contact', 'delete_contact', 
                                               'edit_contact', 'upcoming birthday', 'help', 'exit'])
+            
+            print('LIST OF COMMAND:\n create_contact\n find_contact\n delete_contact\n edit_contact\n upcoming birthday\n help\n exit')
         
             option_input = prompt('Choose contact`s option: ', completer=contact_com_list)
 
@@ -58,6 +63,8 @@ def main():
                 edit_com_list = WordCompleter(['add_phone', 'set_birthday', 'set_email',
                                                 'set_address', 'edit_phone', 'delete_phone', 
                                                 'edit_name', 'help', 'exit'])
+                
+                print('LIST OF COMMAND\n add_phone\n set_birthday\n set_email\n set_address\n edit_phone\n delete_phone\n edit_name\n help\n exit')
                 
                 edit_input = prompt('Choose option: ', completer=edit_com_list)
                 while True:
@@ -129,6 +136,8 @@ def main():
                 find_com_list = WordCompleter(['find_by_name', 'find_by_ID', 
                                                'show_all', 'find_all_matches', 'help', 'exit'])
                 
+                print('LIST OF COMMAND\n find_by_name\n find_by_ID\n show_all\n find_all_matches\n help\n exit')
+                
                 find_input = prompt('Choose option: ', completer=find_com_list)
                 
                 if find_input == 'show_all':
@@ -183,6 +192,8 @@ def main():
                                             'find_note', 'delete_note', 
                                             'help', 'exit'])
             
+            print('LIST OF COMMAND\n create_note\n edit_note\n find_note\n delete_note\n help\n exit')
+            
             n_options_input = prompt('Choose note`s options: ', completer=notes_com_list)
 
             if n_options_input == 'create_note':
@@ -196,6 +207,9 @@ def main():
                 edit_list = WordCompleter(['edit_title', 'edit_text', 
                                            'set_tags', 'help', 'exit'])
                 ID_input = prompt('Enter your note`s ID: ')
+
+                print('LIST OF COMMAND\n edit_title\n edit_text\n set_tags\n help\n exit')
+
                 edit_input = prompt('Choose option: ', completer=edit_list)
                 while True:
                     try: 
@@ -249,6 +263,8 @@ def main():
                                             'find_by_ID', 'sort_by_tags', 'show_all',
                                             'help', 'exit'])
                 
+                print('LIST OF COMMAND\n find_by_title\n find_by_tag\n find_by_ID\n sort_by_tags\n show_all\n help\n exit')
+                
                 find_input = prompt('Choose option: ', completer=find_list)
                 
                 if find_input == 'find_by_title':
@@ -298,10 +314,6 @@ def main():
                 book.save_to_file()
                 notebook.save_to_file()
                 break
-        
-        if category_input == 'sort':
-            folder_for_sort = prompt('Enter folder for sort: ')
-            Sort(folder_for_sort)
 
         if category_input == 'help':
             pass
