@@ -2,8 +2,32 @@ from collections import UserList
 from rich.console import Console
 from rich.table import Table
 import pickle
+from abc import ABC, abstractmethod
 
-class Notes(UserList):
+class NotesView(ABC):
+    @abstractmethod
+    def find_by_tag(self, tag):
+        pass
+
+    @abstractmethod
+    def sort_by_tag(self):
+        pass
+
+    @abstractmethod
+    def find_by_id(self, id):
+        pass
+
+    @abstractmethod
+    def find_by_title(self, title):
+        pass
+
+    @abstractmethod
+    def show_all_notes(self):
+        pass
+
+
+
+class Notes(UserList, NotesView):
     __id = 1
     def add_note(self, note):
         note.ID = self.__id

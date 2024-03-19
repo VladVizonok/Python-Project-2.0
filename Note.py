@@ -1,6 +1,24 @@
 from notes import Notes
+from abc import ABC, abstractmethod
 
-class Note:
+class AbstractNote(ABC):
+    @abstractmethod
+    def add_tag(self, tag):
+        pass
+
+    @abstractmethod
+    def edit_tag(self, new_tag):
+        pass
+
+    @abstractmethod
+    def edit_title(self, new_title):
+        pass
+
+    @abstractmethod
+    def edit_text(self, new_text):
+        pass
+
+class Note(AbstractNote):
 
     def __init__(self, title, text):
         self.tag = ['No tag`s']

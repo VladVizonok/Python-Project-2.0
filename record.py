@@ -1,8 +1,21 @@
 import re
 from datetime import datetime
+from abc import ABC, abstractmethod
 
+class Field(ABC):
+    @abstractmethod
+    def __str__(self):
+        pass
+    
+    @abstractmethod
+    def is_valid(self, value):
+        pass
 
-class FirstName:
+    @abstractmethod
+    def set_value(self, value):
+        pass
+
+class FirstName(Field):
 
     def __init__(self, value):
         self.set_value(value)
@@ -20,7 +33,7 @@ class FirstName:
             raise IndexError
         self.value = value.title()
 
-class LastName:
+class LastName(Field):
 
     def __init__(self, value):
         self.set_value(value)
@@ -39,7 +52,7 @@ class LastName:
         self.value = value.title()
 
 
-class Email:
+class Email(Field):
         
     def __init__(self, value):
         self.set_value(value)
@@ -58,8 +71,8 @@ class Email:
         self.value = value
 
 
-class Birthday:
-    #READY
+class Birthday(Field):
+
     def __init__(self, value):
         self.set_value(value)
 
@@ -78,7 +91,7 @@ class Birthday:
    
 
 class Address:
-    #READY
+
     def __init__(self, address_string):
         self.address_str = address_string
 
@@ -105,8 +118,6 @@ class Record:
         self.phones = []
         self.ID = None
         
-
-
     def add_phone(self, phone):
         #READY
         new_number = phone
@@ -175,4 +186,3 @@ class Record:
         full_names = self.first_name.value + ' ' + self.last_name.value
         return full_names
     
-

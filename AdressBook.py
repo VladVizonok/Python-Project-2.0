@@ -6,9 +6,31 @@ from rich.console import Console
 from rich.table import Table
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
+from abc import ABC, abstractmethod
+
+class AddressView(ABC):
+    @abstractmethod
+    def find_by_name(self, name):
+        pass
+
+    @abstractmethod
+    def find_all_match(self, word_to_find):
+        pass
+
+    @abstractmethod
+    def find_by_id(self, ID):
+        pass
+
+    @abstractmethod
+    def show_all(self):
+        pass
+
+    @abstractmethod
+    def upcoming_birthdays(self, days):
+        pass
 
 
-class AddressBook(UserList):
+class AddressBook(UserList, AddressView):
     __id = 1 
     def add_record(self, record):
         record.ID = self.__id
