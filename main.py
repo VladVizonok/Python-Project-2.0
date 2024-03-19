@@ -1,14 +1,17 @@
-from collections import UserList
-from datetime import datetime, timedelta
 import pickle
-from record import FirstName, LastName, Birthday, Address, Email, Record
-from rich.console import Console
-from rich.table import Table
 from note import Note
 from notes import Notes
-from adressbook import AddressBook
+from rich.table import Table
+from collections import UserList
+from rich.console import Console
 from prompt_toolkit import prompt
+from adressbook import AddressBook
+from datetime import datetime, timedelta
 from prompt_toolkit.completion import WordCompleter
+from record import FirstName, LastName, Birthday, Address, Email, Record
+
+
+
 
 
 

@@ -1,7 +1,7 @@
+import pickle
+from rich.table import Table
 from collections import UserList
 from rich.console import Console
-from rich.table import Table
-import pickle
 from abc import ABC, abstractmethod
 
 class NotesView(ABC):
