@@ -11,11 +11,6 @@ from prompt_toolkit.completion import WordCompleter
 from record import FirstName, LastName, Birthday, Address, Email, Record
 
 
-
-
-
-
-
 def main():
     notebook = Notes()
     notebook.open_from_file()
