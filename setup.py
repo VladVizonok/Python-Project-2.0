@@ -7,9 +7,7 @@ setup(name= 'CLI_2_0',
       author= 'vlad_vznk',
       license= 'MIT',
       packages= find_namespace_packages(),
-      install_requires=['pickle', 
-                        'collections', 
-                        'rich', 
+      install_requires=['rich', 
                         'prompt_toolkit'],
       entry_points={'console_scripts': ['cli = CLI_2_0.main:main']}
       )

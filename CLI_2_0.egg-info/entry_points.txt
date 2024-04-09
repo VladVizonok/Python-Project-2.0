@@ -1,0 +1,2 @@
+[console_scripts]
+cli = CLI_2_0.main:main
