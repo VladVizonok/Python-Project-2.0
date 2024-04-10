@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: CLI_2_0
+Version: 1
+Summary: Your personal helper.
+Home-page: https://github.com/VladVizonok/Python-Project-2.0.git
+Author: vlad_vznk
+License: MIT
+Requires-Dist: rich
+Requires-Dist: prompt_toolkit
